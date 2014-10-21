@@ -1,0 +1,30 @@
+{
+  "name": "steno",
+  "version": "0.1.0",
+  "description": "File writer",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/typicode/steno.git"
+  },
+  "keywords": [
+    "file",
+    "write",
+    "writer",
+    "asynchronous",
+    "synchronous",
+    "stenograph"
+  ],
+  "author": "typicode",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/typicode/steno/issues"
+  },
+  "homepage": "https://github.com/typicode/steno",
+  "devDependencies": {
+    "tape": "^3.0.1"
+  }
+}
