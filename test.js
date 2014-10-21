@@ -15,7 +15,7 @@ test('steno without callback', function(t) {
 
   setTimeout(function() {
     t.equal(+fs.readFileSync('tmp.txt'), max)
-  }, 100)
+  }, 1000)
 
   for (var i= 0; i <= max; i++) {
     writer.write(i)
