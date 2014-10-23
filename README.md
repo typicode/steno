@@ -10,6 +10,8 @@ for (var i = 0; i < 10000; i++) {
 }
 ```
 
+This code runs in `2ms` versus `~5500ms` with `fs.writeFileSync`.
+
 ## API
 
 __steno(filename)__
@@ -18,9 +20,9 @@ Returns writer for filename.
 
 __writer.write(data)__
 
-Writes data to filename or buffers it if filename is being written.
+Writes data to file. If file is already being written, data is buffered until it can be written.
 
-__writer.callback__
+__writer.setCallback(cb)__
 
 Use it to set a callback that will be executed between two writes. Useful for atomic writing, logging, delaying, ...
 
@@ -29,7 +31,7 @@ steno('tmp-file.txt').setCallback(function(data, next) {
   console.log(data + ' has been written to ' + this.filename)
   fs.rename('tmp-file.txt', 'file.txt', function(err) {
     if (err) throw err
-    next()
+    next() // next must be called
   })
 })
 ```

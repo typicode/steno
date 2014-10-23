@@ -1,3 +1,5 @@
+// Run `node benchmark`
+
 var fs = require('fs')
 var steno = require('./')
 

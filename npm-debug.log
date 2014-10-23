@@ -1,0 +1,29 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node',
+1 verbose cli   '/home/sonic/.nvm/v0.10.32/bin/npm',
+1 verbose cli   'version',
+1 verbose cli   '0.1.2' ]
+2 info using npm@2.1.4
+3 info using node@v0.10.32
+4 info git [ 'status', '--porcelain' ]
+5 verbose stack Error: Git working directory not clean.
+5 verbose stack M  README.md
+5 verbose stack M  benchmark.js
+5 verbose stack     at /home/sonic/.nvm/v0.10.32/lib/node_modules/npm/lib/version.js:92:33
+5 verbose stack     at ChildProcess.exithandler (child_process.js:646:7)
+5 verbose stack     at ChildProcess.emit (events.js:98:17)
+5 verbose stack     at maybeClose (child_process.js:756:16)
+5 verbose stack     at Socket.<anonymous> (child_process.js:969:11)
+5 verbose stack     at Socket.emit (events.js:95:17)
+5 verbose stack     at Pipe.close (net.js:465:12)
+6 verbose cwd /home/sonic/Dropbox/steno
+7 error Linux 3.13.0-37-generic
+8 error argv "node" "/home/sonic/.nvm/v0.10.32/bin/npm" "version" "0.1.2"
+9 error node v0.10.32
+10 error npm  v2.1.4
+11 error Git working directory not clean.
+11 error M  README.md
+11 error M  benchmark.js
+12 error If you need help, you may report this error at:
+12 error     <http://github.com/npm/npm/issues>
+13 verbose exit [ 1, true ]
