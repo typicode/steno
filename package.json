@@ -4,7 +4,8 @@
   "description": "File writer",
   "main": "index.js",
   "scripts": {
-    "test": "node test"
+    "test": "node test",
+    "prepush": "npm test"
   },
   "repository": {
     "type": "git",
