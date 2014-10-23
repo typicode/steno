@@ -1,2 +1,3 @@
+**/*.log
 tmp.txt
 node_modules
