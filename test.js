@@ -26,12 +26,12 @@ test('steno with callback', function(t) {
   reset()
   t.plan(1)
 
-  writer.callback = function(data, next) {
+  writer.setCallback(function(data, next) {
     if (data === max) {
       t.equal(+fs.readFileSync('tmp.txt'), max)
     }
     next()
-  }
+  })
 
   for (var i= 0; i <= max; i++) {
     writer.write(i)

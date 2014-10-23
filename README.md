@@ -25,11 +25,11 @@ __writer.callback__
 Use it to set a callback that will be executed between two writes. Useful for atomic writing, logging, delaying, ...
 
 ```javascript
-steno('tmp-file.txt').callback = function(data, next) {
+steno('tmp-file.txt').setCallback(function(data, next) {
   console.log(data + ' has been written to ' + this.filename)
   fs.rename('tmp-file.txt', 'file.txt', function(err) {
     if (err) throw err
     next()
   })
-}
+})
 ```

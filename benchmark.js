@@ -19,10 +19,10 @@ benchmark(function(done) {
 benchmark(function(done) {
   var writer = steno('tmp.txt')
 
-  writer.callback = function(data, next) {
+  writer.setCallback(function(data, next) {
     if (data === max) done('steno.write     ')
     next()
-  }
+  })
 
   for (var i = 0; i <= max; i++) writer.write(i)
 })
