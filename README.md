@@ -1,4 +1,4 @@
-# steno ![](http://img.shields.io/npm/v/steno.svg?style=flat) ![](http://img.shields.io/travis/typicode/steno.svg?style=flat)
+# steno ![https://www.npmjs.org/package/steno](http://img.shields.io/npm/v/steno.svg?style=flat) ![https://travis-ci.org/typicode/steno](http://img.shields.io/travis/typicode/steno.svg?style=flat)
 
 > Super fast non-blocking file writer for Node.
 
