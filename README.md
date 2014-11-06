@@ -19,8 +19,9 @@ This code runs in `2ms` versus `~5500ms` with `fs.writeFileSync`.
 ```javascript
 steno('file.txt').write('A') // starts writing A to file
 steno('file.txt').write('B') // still writing A, B is buffered
-steno('file.txt').write('C') // still writing A, B is replaced by C
-// A has been written to file, starts writting C (B has been skipped)
+steno('file.txt').write('C') // still writing A, C replaces B
+// ...
+// A has been written to file, starts writting C (B is skipped)
 ```
 
 ## Methods
