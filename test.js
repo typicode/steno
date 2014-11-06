@@ -22,11 +22,24 @@ test('steno without callback', function(t) {
   }
 })
 
+test('steno default callback', function(t) {
+  reset()
+  t.plan(2)
+
+  writer.callback(null, '', function() {
+    t.pass('next was called')
+  })
+
+  t.throws(function() {
+    writer.callback(new Error())
+  })
+})
+
 test('steno with callback', function(t) {
   reset()
   t.plan(1)
 
-  writer.setCallback(function(data, next) {
+  writer.setCallback(function(err, data, next) {
     if (data === max) {
       t.equal(+fs.readFileSync('tmp.txt'), max)
     }
@@ -36,4 +49,17 @@ test('steno with callback', function(t) {
   for (var i= 0; i <= max; i++) {
     writer.write(i)
   }
+})
+
+test('steno error with callback', function(t) {
+  reset()
+  t.plan(1)
+
+  var writer = steno(__dirname + '/dir/doesnt/exist')
+
+  writer.setCallback(function(err) {
+    t.equal(err.code, 'ENOENT')
+  })
+
+  writer.write('')
 })

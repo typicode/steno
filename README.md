@@ -35,18 +35,31 @@ Writes data to file. If file is already being written, data is buffered until it
 
 __writer.setCallback(cb)__
 
-Use it to set a callback that will be executed between two writes. Useful for atomic writing, logging, delaying, ...
+Sets a callback. Useful for creating atomic writers, logging, delaying, ...
 
 ```javascript
-steno('tmp-file.txt').setCallback(function(data, next) {
-  console.log(data + ' has been written to ' + this.filename)
-  
+var atomic = steno('tmp-file.txt').setCallback(function(err, data, next) {
+  // Writing is stopped until next is called
+  if (err) throw err
+
   fs.rename('tmp-file.txt', 'file.txt', function(err) {
     if (err) throw err
-    next() // next must be called
+    next()
   })
 })
+
+atomic.write('Hello world')
 ```
+
+## Properties
+
+__writer.lock__
+
+`true` if file is being written, `false` otherwise.
+
+__writer.next__
+
+`null` when there's no more data waiting to be written to file.
 
 ## License
 

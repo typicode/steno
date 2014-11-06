@@ -1,18 +1,18 @@
 var fs = require('fs')
-var util = require('util')
-var events = require('events')
 
 var writers = {}
 
 function Writer(filename) {
-  events.EventEmitter.call(this)
   this.filename = filename
 }
 
-util.inherits(Writer, events.EventEmitter)
-
 Writer.prototype.setCallback = function(callback) {
   this.callback = callback
+}
+
+Writer.prototype.callback = function(err, data, next) {
+  if (err) throw err
+  next()
 }
 
 Writer.prototype.write = function(data) {
@@ -29,8 +29,6 @@ Writer.prototype.write = function(data) {
     var self = this
     fs.writeFile(this.filename, data, function(err) {
 
-      if (err) throw err
-
       function next() {
         self.lock = false
         if (self.next) {
@@ -40,7 +38,7 @@ Writer.prototype.write = function(data) {
         }
       }
 
-      self.callback ? self.callback(data, next) : next()
+      self.callback ? self.callback(err, data, next) : next()
     })
 
   }

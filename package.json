@@ -4,7 +4,7 @@
   "description": "File writer",
   "main": "index.js",
   "scripts": {
-    "test": "node test",
+    "test": "node test | tap-dot",
     "prepush": "npm test"
   },
   "repository": {
@@ -27,6 +27,7 @@
   "homepage": "https://github.com/typicode/steno",
   "devDependencies": {
     "husky": "^0.6.1",
+    "tap-dot": "^0.2.3",
     "tape": "^3.0.1"
   }
 }
