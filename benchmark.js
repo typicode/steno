@@ -21,7 +21,7 @@ benchmark(function(done) {
 benchmark(function(done) {
   var writer = steno('tmp.txt')
 
-  writer.setCallback(function(data, next) {
+  writer.setCallback(function(err, data, next) {
     if (data === max) done('steno.write     ')
     next()
   })
