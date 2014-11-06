@@ -41,6 +41,7 @@ Sets a callback. Useful for creating atomic writers, logging, delaying, ...
 var atomic = steno('tmp-file.txt').setCallback(function(err, data, next) {
   // Writing is stopped until next is called
   if (err) throw err
+  
   console.log(data, 'has been written to', this.filename)
 
   fs.rename(this.filename, 'file.txt', function(err) {
