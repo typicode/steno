@@ -40,6 +40,7 @@ Sets a callback. Useful for creating atomic writers, logging, delaying, ...
 ```javascript
 var atomic = steno('tmp-file.txt').setCallback(function(err, data, next) {
   // Writing is stopped until next is called
+
   if (err) throw err
 
   fs.rename('tmp-file.txt', 'file.txt', function(err) {
@@ -55,7 +56,7 @@ atomic.write('Hello world')
 
 __writer.lock__
 
-`true` if file is being written, `false` otherwise.
+`true` if file is being written.
 
 __writer.next__
 
