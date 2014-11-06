@@ -40,10 +40,11 @@ Sets a callback. Useful for creating atomic writers, logging, delaying, ...
 ```javascript
 var atomic = steno('tmp-file.txt').setCallback(function(err, data, next) {
   // Writing is stopped until next is called
+  console.log(data, 'has been written to file')
 
   if (err) throw err
 
-  fs.rename('tmp-file.txt', 'file.txt', function(err) {
+  fs.rename(this.filename, 'file.txt', function(err) {
     if (err) throw err
     next()
   })
