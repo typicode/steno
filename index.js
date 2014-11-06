@@ -21,10 +21,9 @@ Writer.prototype.write = function(data) {
 
     this.next = data
 
-  } else if (data !== this.last) {
+  } else {
 
     this.lock = true
-    this.last = data
 
     var self = this
     fs.writeFile(this.filename, data, function(err) {
@@ -38,7 +37,7 @@ Writer.prototype.write = function(data) {
         }
       }
 
-      self.callback ? self.callback(err, data, next) : next()
+      self.callback(err, data, next)
     })
 
   }
