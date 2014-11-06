@@ -20,7 +20,6 @@ This code runs in `2ms` versus `~5500ms` with `fs.writeFileSync`.
 steno('file.txt').write('A') // starts writing A to file
 steno('file.txt').write('B') // still writing A, B is buffered
 steno('file.txt').write('C') // still writing A, C replaces B
-// ...
 // A has been written to file, starts writting C (B is skipped)
 ```
 
