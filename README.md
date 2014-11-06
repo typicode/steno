@@ -1,4 +1,4 @@
-# steno [![](http://img.shields.io/travis/typicode/steno.svg?style=flat)](https://travis-ci.org/typicode/steno)
+# steno [![Build Status](https://travis-ci.org/typicode/steno.svg?branch=master)](https://travis-ci.org/typicode/steno) [![npm version](https://badge.fury.io/js/steno.svg)](http://badge.fury.io/js/steno)
 
 > Super fast non-blocking file writer for Node
 
