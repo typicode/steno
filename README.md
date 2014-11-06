@@ -1,6 +1,8 @@
-# steno [![](http://img.shields.io/npm/v/steno.svg?style=flat)](https://www.npmjs.org/package/steno) [![](http://img.shields.io/travis/typicode/steno.svg?style=flat)](https://travis-ci.org/typicode/steno)
+# steno [![](http://img.shields.io/travis/typicode/steno.svg?style=flat)](https://travis-ci.org/typicode/steno)
 
-> Super fast non-blocking file writer for Node.
+> Super fast non-blocking file writer for Node
+
+## Example
 
 ```javascript
 var steno = require('steno')
@@ -12,7 +14,16 @@ for (var i = 0; i < 10000; i++) {
 
 This code runs in `2ms` versus `~5500ms` with `fs.writeFileSync`.
 
-## API
+## How it works
+
+```javascript
+steno('file.txt').write('A') // starts writing A to file
+steno('file.txt').write('B') // still writing A, B is buffered
+steno('file.txt').write('C') // still writing A, B is replaced by C
+// A has been written to file, starts writting C (B has been skipped)
+```
+
+## Methods
 
 __steno(filename)__
 
@@ -29,9 +40,14 @@ Use it to set a callback that will be executed between two writes. Useful for at
 ```javascript
 steno('tmp-file.txt').setCallback(function(data, next) {
   console.log(data + ' has been written to ' + this.filename)
+  
   fs.rename('tmp-file.txt', 'file.txt', function(err) {
     if (err) throw err
     next() // next must be called
   })
 })
 ```
+
+## License
+
+MIT - [Typicode](https://github.com/typicode)
