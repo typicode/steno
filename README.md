@@ -63,7 +63,7 @@ Writes data to file. If file is already being written, data is buffered until it
 
 __writer.setCallback(cb)__
 
-Sets a writer level callback that is called just after file has been written. Useful for creating atomic writers, logging, delaying, ...
+Sets a writer level callback that is called only after file has been written. Useful for creating atomic writers, logging, delaying, ...
 
 ```javascript
 var atomicWriter = steno('tmp-file.txt').setCallback(function(err, data, next) {
