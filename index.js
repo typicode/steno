@@ -4,22 +4,24 @@ var writers = {}
 
 function Writer(filename) {
   this.filename = filename
+  this._callbacks = []
 }
 
-Writer.prototype.setCallback = function(callback) {
-  this.callback = callback
-}
-
-Writer.prototype.callback = function(err, data, next) {
+Writer.prototype._callback = function(err, data, next) {
   if (err) throw err
   next()
 }
 
-Writer.prototype.write = function(data) {
+Writer.prototype.setCallback = function(cb) {
+  this._callback = cb
+}
+
+Writer.prototype.write = function(data, cb) {
 
   if (this.lock) {
 
     this.next = data
+    if (cb) this._callbacks.push(cb)
 
   } else {
 
@@ -37,7 +39,13 @@ Writer.prototype.write = function(data) {
         }
       }
 
-      self.callback(err, data, next)
+      self._callback(err, data, next)
+
+      var c
+      while (c = self._callbacks.shift()) {
+        c(err)
+      }
+      if (cb) cb(err)
     })
 
   }

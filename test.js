@@ -9,7 +9,7 @@ function reset() {
 var max = 10 * 1000 * 1000
 var writer = steno('tmp.txt')
 
-test('steno without callback', function(t) {
+test('writer without callback', function(t) {
   reset()
   t.plan(1)
 
@@ -22,20 +22,25 @@ test('steno without callback', function(t) {
   }
 })
 
-test('steno default callback', function(t) {
+test('writer default callback', function(t) {
   reset()
   t.plan(2)
 
-  writer.callback(null, '', function() {
+  // default callback should call function next
+  // when err is null
+  var err = null
+  var next = function() {
     t.pass('next was called')
-  })
+  }
+  writer._callback(err, '', next)
 
+  // default callback should throw an error
   t.throws(function() {
-    writer.callback(new Error())
+    writer._callback(new Error())
   })
 })
 
-test('steno with callback', function(t) {
+test('writer with callback', function(t) {
   reset()
   t.plan(1)
 
@@ -51,7 +56,7 @@ test('steno with callback', function(t) {
   }
 })
 
-test('steno error with callback', function(t) {
+test('writer error with callback', function(t) {
   reset()
   t.plan(1)
 
@@ -62,4 +67,13 @@ test('steno error with callback', function(t) {
   })
 
   writer.write('')
+})
+
+test('write callback', function(t) {
+  reset()
+  t.plan(3)
+
+  writer.write('A', t.false)
+  writer.write('B', t.false)
+  writer.write('C', t.false)
 })
