@@ -36,7 +36,7 @@ for (var i = 0; i < 10000; i++) {
 }
 ```
 
-Also, it will run in `2ms` versus `~5500ms` with `fs.writeFileSync`.
+Race condition is prevented and it runs in `2ms` versus `~5500ms` with `fs.writeFileSync`.
 
 ## How it works
 
