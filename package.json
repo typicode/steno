@@ -1,7 +1,7 @@
 {
   "name": "steno",
-  "version": "0.2.1",
-  "description": "File writer",
+  "version": "0.3.0",
+  "description": "Fast non-blocking file writer for Node",
   "main": "index.js",
   "scripts": {
     "test": "node test | tap-dot",
@@ -17,7 +17,9 @@
     "writer",
     "asynchronous",
     "synchronous",
-    "stenograph"
+    "race",
+    "condition",
+    "safe"
   ],
   "author": "typicode",
   "license": "MIT",
@@ -26,7 +28,7 @@
   },
   "homepage": "https://github.com/typicode/steno",
   "devDependencies": {
-    "husky": "^0.6.1",
+    "husky": "^0.6.2",
     "tap-dot": "^0.2.3",
     "tape": "^3.0.1"
   }
