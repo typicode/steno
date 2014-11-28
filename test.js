@@ -1,4 +1,5 @@
 var fs = require('fs')
+var path = require('path')
 var test = require('tape')
 var steno = require('./')
 
@@ -76,4 +77,11 @@ test('write callback', function(t) {
   writer.write('A', t.false)
   writer.write('B', t.false)
   writer.write('C', t.false)
+})
+
+test('store absolute paths', function(t) {
+  reset()
+  t.plan(1)
+
+  t.equal(writer, steno(path.resolve('tmp.txt')))
 })
