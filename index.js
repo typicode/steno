@@ -1,4 +1,5 @@
 var fs = require('fs')
+var path = require('path')
 
 var writers = {}
 
@@ -52,5 +53,6 @@ Writer.prototype.write = function(data, cb) {
 }
 
 module.exports = function(filename) {
-  return writers[filename] = writers[filename] || new Writer(filename)
+  var _filename = path.resolve(filename)
+  return writers[_filename] = writers[_filename] || new Writer(filename)
 }
