@@ -1,6 +1,6 @@
 {
   "name": "steno",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Fast non-blocking file writer for Node",
   "main": "index.js",
   "scripts": {
