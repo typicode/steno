@@ -1,6 +1,6 @@
 # steno [![](https://badge.fury.io/js/steno.svg)](http://badge.fury.io/js/steno) [![](https://travis-ci.org/typicode/steno.svg?branch=master)](https://travis-ci.org/typicode/steno)
 
-> Safe and fast non-blocking file writer for Node
+> Fast and safer non-blocking file writer for Node
 
 ```javascript
 var steno = require('steno')
@@ -49,7 +49,7 @@ steno('file.txt').write('C') // still writing A, B is replaced by C
                              // starts writting C (B has been skipped)
 ```
 
-When file is being written, data is stored in memory and flushed to disk as soon as possible. Please note also that steno skips intermediate data (B in this example).
+When file is being written, data is stored in memory and flushed to disk as soon as possible. Please note also that steno skips intermediate data (B in this example) and assumes to be run in a single process (i.e. not in a cluster).
 
 ## Methods
 
