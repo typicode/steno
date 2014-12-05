@@ -49,7 +49,7 @@ steno('file.txt').write('C') // still writing A, B is replaced by C
                              // starts writting C (B has been skipped)
 ```
 
-When file is being written, data is stored in memory and flushed to disk as soon as possible. Please note also that steno skips intermediate data (B in this example) and assumes to be run in a single process (i.e. not in a cluster).
+When file is being written, data is stored in memory and flushed to disk as soon as possible. Please note also that steno skips intermediate data (B in this example) and assumes to be run in a single process.
 
 ## Methods
 
