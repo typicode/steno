@@ -15,6 +15,7 @@ Writer.prototype._callback = function(err, data, next) {
 
 Writer.prototype.setCallback = function(cb) {
   this._callback = cb
+  return this
 }
 
 Writer.prototype.write = function(data, cb) {
@@ -50,6 +51,8 @@ Writer.prototype.write = function(data, cb) {
     })
 
   }
+
+  return this
 }
 
 module.exports = function(filename) {
