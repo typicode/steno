@@ -14,15 +14,15 @@ If you need to write to file, you either use `writeFileSync` or `writeFile`. The
 For example:
 
 ```javascript
-// Very slow but file's content will always be 9999
-for (var i = 0; i < 10000; i++) {
+// Very slow but file's content will always be 10000
+for (var i = 0; i <= 10000; i++) {
   fs.writeFileSync('file.txt', i)
 }
 ```
 
 ```javascript
 // Very fast but file's content may be 5896, 2563, 9856, ...
-for (var i = 0; i < 10000; i++) {
+for (var i = 0; i <= 10000; i++) {
   fs.writeFile('file.txt', i, function() {})
 }
 ```
@@ -30,8 +30,8 @@ for (var i = 0; i < 10000; i++) {
 With steno:
 
 ```javascript
-// Very fast and file's content will always be 9999
-for (var i = 0; i < 10000; i++) {
+// Very fast and file's content will always be 10000
+for (var i = 0; i <= 10000; i++) {
   steno('file.txt').write(i)
 }
 ```
