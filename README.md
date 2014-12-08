@@ -1,6 +1,6 @@
 # steno [![](https://badge.fury.io/js/steno.svg)](http://badge.fury.io/js/steno) [![](https://travis-ci.org/typicode/steno.svg?branch=master)](https://travis-ci.org/typicode/steno)
 
-> Fast and safe non-blocking file writer for Node
+> Fast and safe file writer that prevents race condition
 
 ```javascript
 var steno = require('steno')
@@ -59,22 +59,53 @@ Returns writer for filename.
 
 __writer.write(data, [cb])__
 
-Writes data to file. If file is already being written, data is buffered until it can be written. An optional callback can also be set to be notified when data has been written to disk.
+Writes data to file. If file is already being written, data is buffered until it can be written.
+
+```javascript
+steno('file.txt').write('data')
+```
+
+An optional callback can be set to be notified when data has been flushed.
+
+```javascript
+function w(data) {
+  steno('file.txt').write(data, function(err) {
+    if (err) throw err
+    console.log('OK')
+  })
+}
+
+w('A')
+w('B')
+w('C')
+
+// OK
+// OK
+// OK
+```
 
 __writer.setCallback(cb)__
 
-Sets a writer level callback that is called only after file has been written. Useful for creating atomic writers, logging, delaying, ...
+Sets a writer level callback that is called __only__ after file has been written. Useful for creating atomic writers, logging, delaying, ...
 
 ```javascript
-var atomicWriter = steno('tmp-file.txt').setCallback(function(err, data, next) {
+var atomicWriter = steno('tmp.txt').setCallback(function(err, data, next) {
   if (err) throw err
-  fs.rename('tmp-file.txt', 'file.txt', function(err) {
+  fs.rename('tmp.txt', 'file.txt', function(err) {
     if (err) throw err
+    console.log('OK')
     next()
   })
 })
 
-atomicWriter.write('Hello world')
+atomicWriter.write('A')
+atomicWriter.write('B')
+atomicWriter.write('C')
+
+// OK
+// OK
+
+// File has been actually written twice
 ```
 
 ## License
