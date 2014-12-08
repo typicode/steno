@@ -56,6 +56,6 @@ Writer.prototype.write = function(data, cb) {
 }
 
 module.exports = function(filename) {
-  var _filename = path.resolve(filename)
-  return writers[_filename] = writers[_filename] || new Writer(filename)
+  filename = path.resolve(filename)
+  return writers[filename] = writers[filename] || new Writer(filename)
 }
