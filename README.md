@@ -1,6 +1,6 @@
 # steno [![](https://badge.fury.io/js/steno.svg)](http://badge.fury.io/js/steno) [![](https://travis-ci.org/typicode/steno.svg?branch=master)](https://travis-ci.org/typicode/steno)
 
-> Fast and safe file writer that prevents race condition
+> Fast non-blocking file writer that prevents race condition
 
 ```javascript
 var steno = require('steno')
