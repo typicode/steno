@@ -47,7 +47,9 @@ server.post('/increment', function (req, res) {
 
 With steno you'll always have the same data in your server and file. And in case of a crash, file integrity will be preserved.
 
-__Important__: works only in a single instance of Node.
+if needed, you can also use `steno.writeFileSync()` which offers atomic writing too.
+
+__Important: works only in a single instance of Node.__
 
 ## License
 

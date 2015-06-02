@@ -71,3 +71,8 @@ module.exports.writeFile = function(file, data, cb) {
   // Write
   writers[file].write(data, cb)
 }
+
+module.exports.writeFileSync = function(file, data) {
+  fs.writeFileSync(getTempFile(file), data)
+  fs.renameSync(getTempFile(file), file)
+}

@@ -43,6 +43,14 @@ test('There should not be a race condition with steno', function(t) {
   }
 })
 
+test('There should be a synchronous version', function (t) {
+  reset()
+  t.plan(1)
+
+  steno.writeFileSync('tmp.txt', 0)
+  t.equal(+fs.readFileSync('tmp.txt'), 0)
+})
+
 test('Error handling with steno', function(t) {
   reset()
   t.plan(1)
