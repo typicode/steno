@@ -1,3 +1,4 @@
 **/*.log
 tmp.txt
+~.tmp.txt
 node_modules

@@ -1,112 +1,53 @@
 # steno [![](https://badge.fury.io/js/steno.svg)](http://badge.fury.io/js/steno) [![](https://travis-ci.org/typicode/steno.svg?branch=master)](https://travis-ci.org/typicode/steno)
 
-> Fast non-blocking file writer that prevents race condition
+> Simple non-blocking file writer with race condition prevention and atomic writing.
+
+Built on [graceful-fs](https://github.com/isaacs/node-graceful-fs) and used in [lowdb](https://github.com/typicode/lowdb).
+
+## The problem
+
+Let's say you have a server and want to save data to disk:
 
 ```javascript
-var steno = require('steno')
-steno('file.txt').write('data')
+var data = { counter: 0 };
+
+server.post('/', function (req, res) {
+  ++data.counter;
+
+  fs.writeFile('data.json', JSON.stringify(obj), function (err) {
+    if (err) throw err;
+    res.end();
+  });  
+})
 ```
 
-## Example
-
-If you need to write to file, you either use `writeFileSync` or `writeFile`. The first is blocking and the second doesn't prevent race condition.
-
-For example:
+Now if you have many requests, for example `1000`, there's a risk that you end up with:
 
 ```javascript
-// Very slow but file's content will always be 10000
-for (var i = 0; i <= 10000; i++) {
-  fs.writeFileSync('file.txt', i)
-}
+// In your server
+data.counter === 1000;
+
+// In data.json
+data.counter === 865; // or any other value
 ```
 
-```javascript
-// Very fast but file's content may be 5896, 2563, 9856, ...
-for (var i = 0; i <= 10000; i++) {
-  fs.writeFile('file.txt', i, function() {})
-}
-```
+Why? Because, `fs.write` doesn't guarantee that the call order will be kept. Also, if the server is killed while `data.json` is being written, the file can get corrupted.
 
-With steno:
+## The solution
 
 ```javascript
-// Very fast and file's content will always be 10000
-for (var i = 0; i <= 10000; i++) {
-  steno('file.txt').write(i)
-}
-```
-
-Race condition is prevented and it runs in `2ms` versus `~5500ms` with `fs.writeFileSync`.
-
-## How it works
-
-```javascript
-steno('file.txt').write('A') // starts writing A to file
-steno('file.txt').write('B') // still writing A, B is buffered
-steno('file.txt').write('C') // still writing A, B is replaced by C
-                             // ...
-                             // A has been written to file
-                             // starts writting C (B has been skipped)
-```
-
-When file is being written, data is stored in memory and flushed to disk as soon as possible. Please note also that steno skips intermediate data (B in this example) and assumes to be run in a single process.
-
-## Methods
-
-__steno(filename)__
-
-Returns writer for filename.
-
-__writer.write(data, [cb])__
-
-Writes data to file. If file is already being written, data is buffered until it can be written.
-
-```javascript
-steno('file.txt').write('data')
-```
-
-An optional callback can be set to be notified when data has been flushed.
-
-```javascript
-function w(data) {
-  steno('file.txt').write(data, function(err) {
-    if (err) throw err
-    console.log('OK')
-  })
-}
-
-w('A')
-w('B')
-w('C')
-
-// OK
-// OK
-// OK
-```
-
-__writer.setCallback(cb)__
-
-Sets a writer level callback that is called __only__ after file has been written. Useful for creating atomic writers, logging, delaying, ...
-
-```javascript
-var atomicWriter = steno('tmp.txt').setCallback(function(err, data, next) {
-  if (err) throw err
-  fs.rename('tmp.txt', 'file.txt', function(err) {
-    if (err) throw err
-    console.log('OK')
-    next()
+server.post('/increment', function (req, res) {
+  ++obj.counter
+  steno.writeFile('data.json', JSON.stringify(obj), function (err) {
+    if (err) throw err;
+    res.end();
   })
 })
-
-atomicWriter.write('A')
-atomicWriter.write('B')
-atomicWriter.write('C')
-
-// OK
-// OK
-
-// File has been actually written twice
 ```
+
+With steno you'll always have the same data in your server and file. And in case of a crash, file integrity will be preserved.
+
+__Important__: works only in a single instance of Node.
 
 ## License
 

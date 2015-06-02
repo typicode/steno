@@ -11,15 +11,18 @@ function getTempFile(file) {
 
 function Writer(file) {
   this.file = file
+  this.callbacks = []
 }
 
 Writer.prototype.write = function(data, cb) {
+
+  // Save callback for later
+  this.callbacks.push(cb)
 
   if (this.lock) {
     // File is locked
     // Save data for later
     this.next = data
-
   } else {
     // File is not locked
     // Lock it
@@ -29,11 +32,17 @@ Writer.prototype.write = function(data, cb) {
     var tmpFile = getTempFile(this.file)
     fs.writeFile(tmpFile, data, function(err) {
 
-      if (err) throw err
+      if (err) {
+        // On error, call all the callbacks and return
+        while (c = this.callbacks.shift()) c(err)
+        return
+      }
 
       // On success rename the temporary file to the real file
       fs.rename(tmpFile, this.file, function(err) {
-        if (err) throw err
+
+        // Call all the callbacks
+        while (c = this.callbacks.shift()) c(err)
 
         // Unlock file
         this.lock = false
@@ -50,11 +59,15 @@ Writer.prototype.write = function(data, cb) {
     }.bind(this))
 
   }
-
-  return this
 }
 
-module.exports = function(file) {
+module.exports.writeFile = function(file, data, cb) {
+  // Convert to absolute path
   file = path.resolve(file)
-  return writers[file] = writers[file] || new Writer(file)
+
+  // Create or get writer
+  writers[file] = writers[file] || new Writer(file)
+
+  // Write
+  writers[file].write(data, cb)
 }
