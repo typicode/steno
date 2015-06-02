@@ -31,5 +31,8 @@
     "husky": "^0.6.2",
     "tap-dot": "^0.2.3",
     "tape": "^3.0.1"
+  },
+  "dependencies": {
+    "graceful-fs": "^3.0.8"
   }
 }
