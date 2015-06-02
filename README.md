@@ -4,7 +4,7 @@
 
 Built on [graceful-fs](https://github.com/isaacs/node-graceful-fs) and used in [lowdb](https://github.com/typicode/lowdb).
 
-## The problem
+## Without steno
 
 Let's say you have a server and want to save data to disk:
 
@@ -28,12 +28,12 @@ Now if you have many requests, for example `1000`, there's a risk that you end u
 data.counter === 1000;
 
 // In data.json
-data.counter === 865; // or any other value
+data.counter === 865; // ... or any other value
 ```
 
 Why? Because, `fs.write` doesn't guarantee that the call order will be kept. Also, if the server is killed while `data.json` is being written, the file can get corrupted.
 
-## The solution
+## With steno
 
 ```javascript
 server.post('/increment', function (req, res) {
