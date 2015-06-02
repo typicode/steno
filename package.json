@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/typicode/steno",
   "devDependencies": {
+    "after": "^0.8.1",
     "husky": "^0.6.2",
     "tap-dot": "^0.2.3",
     "tape": "^3.0.1"

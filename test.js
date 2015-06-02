@@ -1,5 +1,6 @@
 var fs = require('fs')
 var path = require('path')
+var after = require('after')
 var test = require('tape')
 var steno = require('./')
 
@@ -14,32 +15,30 @@ test('There should be a race condition with fs', function (t) {
   reset()
   t.plan(1)
 
-  setTimeout(function() {
+  var next = after(max, function () {
     t.notEqual(+fs.readFileSync('tmp.txt'), max)
-  }, 1000)
+  })
 
-  for (var i= 0; i <= max; ++i) {
+  for (var i= 0; i < max; ++i) {
     fs.writeFile('tmp.txt', i, function (err) {
       if (err) throw err
+      next()
     })
   }
 })
 
 test('There should not be a race condition with steno', function(t) {
   reset()
-  t.plan(2)
+  t.plan(1)
 
-  setTimeout(function() {
-    t.equal(+fs.readFileSync('tmp.txt'), max)
-    t.equal(counter - 1, max)
-  }, 1000)
+  var next = after(max, function () {
+    t.notEqual(+fs.readFileSync('tmp.txt'), max)
+  })
 
-  var counter = 0
-
-  for (var i= 0; i <= max; ++i) {
+  for (var i= 0; i < max; ++i) {
     steno.writeFile('tmp.txt', i, function (err) {
       if (err) throw er
-      ++counter
+      next()
     })
   }
 })
