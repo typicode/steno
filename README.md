@@ -12,8 +12,10 @@ Let's say you have a server and want to save data to disk:
 var data = { counter: 0 };
 
 server.post('/', function (req, res) {
+  // Increment counter
   ++data.counter;
 
+  // Save data asynchronously
   fs.writeFile('data.json', JSON.stringify(obj), function (err) {
     if (err) throw err;
     res.end();
