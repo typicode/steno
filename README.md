@@ -16,7 +16,7 @@ server.post('/', function (req, res) {
   ++data.counter;
 
   // Save data asynchronously
-  fs.writeFile('data.json', JSON.stringify(obj), function (err) {
+  fs.writeFile('data.json', JSON.stringify(data), function (err) {
     if (err) throw err;
     res.end();
   });  
@@ -39,8 +39,8 @@ Why? Because, `fs.write` doesn't guarantee that the call order will be kept. Als
 
 ```javascript
 server.post('/increment', function (req, res) {
-  ++obj.counter
-  steno.writeFile('data.json', JSON.stringify(obj), function (err) {
+  ++data.counter
+  steno.writeFile('data.json', JSON.stringify(data), function (err) {
     if (err) throw err;
     res.end();
   })
