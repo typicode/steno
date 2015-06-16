@@ -4,7 +4,7 @@
 
 Built on [graceful-fs](https://github.com/isaacs/node-graceful-fs) and used in [lowdb](https://github.com/typicode/lowdb).
 
-## Without steno
+## The problem
 
 Let's say you have a server and want to save data to disk:
 
@@ -35,7 +35,9 @@ data.counter === 865; // ... or any other value
 
 Why? Because, `fs.write` doesn't guarantee that the call order will be kept. Also, if the server is killed while `data.json` is being written, the file can get corrupted.
 
-## With steno
+__steno solves that.__
+
+## Usage
 
 ```javascript
 server.post('/increment', function (req, res) {
