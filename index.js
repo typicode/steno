@@ -31,7 +31,7 @@ Writer.prototype.write = function(data, cb) {
     // Write data to a temporary file
     var tmpFile = getTempFile(this.file)
     fs.writeFile(tmpFile, data, function(err) {
-
+      var c
       if (err) {
         // On error, call all the callbacks and return
         while (c = this.callbacks.shift()) c(err)
