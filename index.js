@@ -2,6 +2,7 @@ var fs = require('graceful-fs')
 var path = require('path')
 
 var writers = {}
+var defaultCB = function(x) { if (x) throw x }
 
 // Returns a temporary file
 // Example: for /some/file will return /some/.~file
@@ -62,6 +63,9 @@ Writer.prototype.write = function(data, cb) {
 }
 
 module.exports.writeFile = function(file, data, cb) {
+  // get default value for cb
+  cb = cb || defaultCB
+  
   // Convert to absolute path
   file = path.resolve(file)
 
