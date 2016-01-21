@@ -4,22 +4,40 @@
 
 Built on [graceful-fs](https://github.com/isaacs/node-graceful-fs) and used in [lowdb](https://github.com/typicode/lowdb).
 
-## The problem
+## Install
+
+```
+npm install steno --save
+```
+
+## Usage
+
+```javascript
+const steno = require('steno')
+
+steno.writeFile('file.json', data, err => {
+  if (err) throw err
+})
+```
+
+## The problem it solves
+
+### Without steno
 
 Let's say you have a server and want to save data to disk:
 
 ```javascript
-var data = { counter: 0 };
+var data = { counter: 0 }
 
-server.post('/', function (req, res) {
+server.post('/', (req, res) => {
   // Increment counter
-  ++data.counter;
+  ++data.counter
 
   // Save data asynchronously
-  fs.writeFile('data.json', JSON.stringify(data), function (err) {
-    if (err) throw err;
-    res.end();
-  });  
+  fs.writeFile('data.json', JSON.stringify(data), err => {
+    if (err) throw err
+    res.end()
+  })
 })
 ```
 
@@ -27,24 +45,23 @@ Now if you have many requests, for example `1000`, there's a risk that you end u
 
 ```javascript
 // In your server
-data.counter === 1000;
+data.counter === 1000
 
 // In data.json
-data.counter === 865; // ... or any other value
+data.counter === 865 // ... or any other value
 ```
 
 Why? Because, `fs.write` doesn't guarantee that the call order will be kept. Also, if the server is killed while `data.json` is being written, the file can get corrupted.
 
-__steno solves that.__
-
-## Usage
+### With steno
 
 ```javascript
-server.post('/increment', function (req, res) {
+server.post('/increment', (req, res) => {
   ++data.counter
-  steno.writeFile('data.json', JSON.stringify(data), function (err) {
-    if (err) throw err;
-    res.end();
+  
+  steno.writeFile('data.json', JSON.stringify(data), err => {
+    if (err) throw err
+    res.end()
   })
 })
 ```
