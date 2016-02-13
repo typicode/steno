@@ -35,6 +35,6 @@
     "tape": "^3.0.1"
   },
   "dependencies": {
-    "graceful-fs": "^3.0.8"
+    "graceful-fs": "^4.1.3"
   }
 }
