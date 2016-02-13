@@ -1,6 +1,6 @@
 {
   "name": "steno",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "Simple file writer with race condition prevention and atomic writing",
   "main": "index.js",
   "scripts": {
