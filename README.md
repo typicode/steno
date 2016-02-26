@@ -2,6 +2,8 @@
 
 > Simple file writer with __atomic writing__ and __race condition prevention__.
 
+Can be used as a drop-in replacement to `fs.writeFile()`.
+
 Built on [graceful-fs](https://github.com/isaacs/node-graceful-fs) and used in [lowdb](https://github.com/typicode/lowdb).
 
 ## Install
@@ -58,7 +60,7 @@ Why? Because, `fs.write` doesn't guarantee that the call order will be kept. Als
 ```javascript
 server.post('/increment', (req, res) => {
   ++data.counter
-  
+
   steno.writeFile('data.json', JSON.stringify(data), err => {
     if (err) throw err
     res.end()
