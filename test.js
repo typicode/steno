@@ -37,7 +37,7 @@ test('There should not be a race condition with steno', function(t) {
 
   for (var i= 0; i < max; ++i) {
     steno.writeFile('tmp.txt', i, function (err) {
-      if (err) throw er
+      if (err) throw err
       next()
     })
   }
