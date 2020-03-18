@@ -10,7 +10,7 @@ function getTempFile (file) {
 }
 
 function Writer (file) {
-  this.file = file
+  this.file = fs.realpathSync(file)
   this.callbacks = []
   this.nextData = null
   this.nextCallbacks = []
