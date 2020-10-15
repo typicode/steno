@@ -6,7 +6,7 @@ var writers = {}
 // Returns a temporary file
 // Example: for /some/file will return /some/.~file
 function getTempFile (file) {
-  return path.join(path.dirname(file), '.~' + path.basename(file))
+  return path.join(path.dirname(file), '.tmp__' + path.basename(file))
 }
 
 function Writer (file) {
