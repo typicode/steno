@@ -4,8 +4,8 @@
   "description": "Simple file writer with race condition prevention and atomic writing",
   "main": "index.js",
   "scripts": {
-    "test": "node test | tap-dot && standard",
-    "prepush": "npm test"
+    "test": "jest",
+    "build": "tsc index"
   },
   "repository": {
     "type": "git",
@@ -30,13 +30,30 @@
   },
   "homepage": "https://github.com/typicode/steno",
   "devDependencies": {
-    "after": "^0.8.1",
-    "husky": "^0.11.1",
-    "standard": "^6.0.7",
+    "@babel/core": "^7.8.7",
+    "@babel/preset-env": "^7.8.7",
+    "@babel/preset-typescript": "^7.8.3",
+    "@types/jest": "^25.1.4",
+    "@types/node": "^13.9.2",
+    "@types/tape": "^4.2.34",
+    "@typescript-eslint/eslint-plugin": "^2.24.0",
+    "@typescript-eslint/parser": "^2.24.0",
+    "babel-jest": "^25.1.0",
+    "eslint-config-prettier": "^6.10.0",
+    "husky": "^4.2.3",
+    "jest": "^25.1.0",
+    "prettier": "^1.19.1",
     "tap-dot": "^0.2.3",
-    "tape": "^3.0.1"
+    "tape": "^3.0.1",
+    "ts-node": "^8.7.0",
+    "typescript": "^3.8.3"
   },
   "dependencies": {
-    "graceful-fs": "^4.1.3"
+    "eslint": "^6.8.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm test"
+    }
   }
 }
