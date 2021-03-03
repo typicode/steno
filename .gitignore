@@ -1,4 +1,5 @@
+node_modules
 **/*.log
 tmp.txt
 .tmp.txt.tmp
-node_modules
+index.js
