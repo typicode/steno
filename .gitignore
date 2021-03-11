@@ -1,5 +1,2 @@
 node_modules
-**/*.log
-tmp.txt
-.tmp.txt.tmp
-index.js
+lib

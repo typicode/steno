@@ -1,7 +1,11 @@
 {
   "extends": "@tsconfig/node10/tsconfig.json",
-  "files": ["index.ts"],
+  "files": [
+    "index.ts"
+  ],
   "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./lib",
     "declaration": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
