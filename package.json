@@ -1,7 +1,7 @@
 {
   "name": "steno",
   "version": "1.0.0",
-  "description": "Fast file writer with race condition prevention and atomic writing",
+  "description": "Specialized fast async file writer",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
@@ -14,7 +14,8 @@
     "prepare": "husky install",
     "prepublishOnly": "npm run build",
     "postversion": "git push && git push --tags && npm publish",
-    "benchmark": "ts-node src/benchmark.ts"
+    "benchmark": "ts-node src/benchmark.ts",
+    "commit": "commit"
   },
   "repository": {
     "type": "git",
