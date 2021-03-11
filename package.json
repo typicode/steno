@@ -1,6 +1,6 @@
 {
   "name": "steno",
-  "version": "0.5.0",
+  "version": "1.0.0",
   "description": "Fast file writer with race condition prevention and atomic writing",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
