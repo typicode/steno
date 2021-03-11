@@ -1,7 +1,7 @@
 {
   "extends": "@tsconfig/node10/tsconfig.json",
   "files": [
-    "index.ts"
+    "src/index.ts"
   ],
   "compilerOptions": {
     "rootDir": "./src",
