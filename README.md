@@ -1,4 +1,4 @@
-# steno [![](http://img.shields.io/npm/dm/steno.svg?style=flat)](https://www.npmjs.org/package/steno) [![Node.js CI](https://github.com/typicode/steno/actions/workflows/node.js.yml/badge.svg)](https://github.com/typicode/steno/actions/workflows/node.js.yml)
+# Steno [![](http://img.shields.io/npm/dm/steno.svg?style=flat)](https://www.npmjs.org/package/steno) [![Node.js CI](https://github.com/typicode/steno/actions/workflows/node.js.yml/badge.svg)](https://github.com/typicode/steno/actions/workflows/node.js.yml)
 
 > Specialized fast async file writer
 
@@ -10,8 +10,8 @@ _https://en.wikipedia.org/wiki/Stenotype_
 
 ## Features
 
-- Fast
-- Lightweight
+- Fast (see benchmark)
+- Lightweight (~6kb)
 - Promise-based
 - Atomic write
 - No race condition
