@@ -2,7 +2,9 @@
 
 > Specialized fast async file writer
 
-If you often write to the same file, steno can make things a lot faster and more reliable. Used in [lowdb](https://github.com/typicode/lowdb).
+If you often write to the same file, steno can make things a lot faster and more reliable.
+
+Used in [lowdb](https://github.com/typicode/lowdb).
 
 _https://en.wikipedia.org/wiki/Stenotype_
 
