@@ -1,4 +1,4 @@
-import fs from 'fs'
+import fs from 'fs/promises'
 import path from 'path'
 
 // Returns a temporary file
@@ -41,8 +41,8 @@ export class Writer {
     this.locked = true
     try {
       // Atomic write
-      await fs.promises.writeFile(this.tempFilename, data, 'utf-8')
-      await fs.promises.rename(this.tempFilename, this.filename)
+      await fs.writeFile(this.tempFilename, data, 'utf-8')
+      await fs.rename(this.tempFilename, this.filename)
 
       // Call resolve
       this.prev?.[0]()
