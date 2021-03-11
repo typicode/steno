@@ -15,12 +15,6 @@ _https://en.wikipedia.org/wiki/Stenotype_
 - No race condition
 - TypeScript definitions
 
-## Install
-
-```shell
-npm install steno
-```
-
 ## Usage
 
 ```javascript
@@ -37,27 +31,17 @@ async function save() {
 
 ## Benchmark
 
-```javascript
-console.time('fs')
-for (let i = 0; i < 1000; i++) {
-  await fs.writeFile('fs.txt', String(i))
-}
-console.timeEnd('fs')
-
-console.time('steno')
-const steno = new Writer('steno.txt')
-for (let i = 0; i < 1000; i++) {
-  steno.write(String(i))
-}
-console.timeEnd('steno')
-```
+`npm run benchmark`
 
 ```
-fs: 69.155ms
-steno: 0.706ms
-```
+Write 1KB data to the same file x 1000
+  fs   : 68.464ms
+  steno: 0.578ms
 
-Both files will contain the same data in the end.
+Write 1MB data to the same file x 1000
+  fs   : 2.166s
+  steno: 1.153ms
+```
 
 ## License
 

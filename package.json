@@ -12,7 +12,7 @@
     "test": "jest",
     "build": "del-cli lib && tsc",
     "prepare": "husky install",
-    "benchmark": "ts-node src/index.benchmark.ts"
+    "benchmark": "ts-node src/benchmark.ts"
   },
   "repository": {
     "type": "git",
