@@ -38,6 +38,9 @@
   },
   "homepage": "https://github.com/typicode/steno",
   "devDependencies": {
+    "@commitlint/cli": "^12.0.1",
+    "@commitlint/config-conventional": "^12.0.1",
+    "@commitlint/prompt-cli": "^12.0.1",
     "@tsconfig/node10": "^1.0.7",
     "@types/jest": "^26.0.20",
     "@types/node": "^14.14.31",
@@ -53,7 +56,9 @@
   "eslintConfig": {
     "extends": "@typicode",
     "parserOptions": {
-      "project": ["./tsconfig.lint.json"]
+      "project": [
+        "./tsconfig.lint.json"
+      ]
     }
   }
 }
