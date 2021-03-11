@@ -1,78 +1,47 @@
-# steno [![](http://img.shields.io/npm/dm/steno.svg?style=flat)](https://www.npmjs.org/package/steno)  [![](https://travis-ci.org/typicode/steno.svg?branch=master)](https://travis-ci.org/typicode/steno)
+# steno [![](http://img.shields.io/npm/dm/steno.svg?style=flat)](https://www.npmjs.org/package/steno) [![](https://travis-ci.org/typicode/steno.svg?branch=master)](https://travis-ci.org/typicode/steno)
 
-> Simple file writer with __atomic writing__ and __race condition prevention__.
+> Specialized fast async file writer
 
-Can be used as a drop-in replacement to `fs.writeFile()`.
+If you often write to the same file, steno can make things a lot faster and more reliable. Used in [lowdb](https://github.com/typicode/lowdb).
 
-Built on [graceful-fs](https://github.com/isaacs/node-graceful-fs) and used in [lowdb](https://github.com/typicode/lowdb).
+_https://en.wikipedia.org/wiki/Stenotype_
 
-## Install
+## Features
 
-```
-npm install steno --save
-```
+- Fast
+- Lightweight
+- Promise-based
+- Atomic write
+- No race condition
+- TypeScript definitions
 
 ## Usage
 
 ```javascript
-const steno = require('steno')
+import { Writer } from 'steno'
 
-steno.writeFile('file.json', data, err => {
-  if (err) throw err
-})
+// Create a singleton writer
+const file = new Writer('file.txt')
+
+// Use it in the rest of your code
+async function save() {
+  await file.write('some data')
+}
 ```
 
-## The problem it solves
+## Benchmark
 
-### Without steno
+`npm run benchmark`
 
-Let's say you have a server and want to save data to disk:
-
-```javascript
-var data = { counter: 0 }
-
-server.post('/', (req, res) => {
-  // Increment counter
-  ++data.counter
-
-  // Save data asynchronously
-  fs.writeFile('data.json', JSON.stringify(data), err => {
-    if (err) throw err
-    res.end()
-  })
-})
 ```
+Write 1KB data to the same file x 1000
+  fs   : 68.464ms
+  steno: 0.578ms
 
-Now if you have many requests, for example `1000`, there's a risk that you end up with:
-
-```javascript
-// In your server
-data.counter === 1000
-
-// In data.json
-data.counter === 865 // ... or any other value
+Write 1MB data to the same file x 1000
+  fs   : 2.166s
+  steno: 1.153ms
 ```
-
-Why? Because, `fs.write` doesn't guarantee that the call order will be kept. Also, if the server is killed while `data.json` is being written, the file can get corrupted.
-
-### With steno
-
-```javascript
-server.post('/increment', (req, res) => {
-  ++data.counter
-
-  steno.writeFile('data.json', JSON.stringify(data), err => {
-    if (err) throw err
-    res.end()
-  })
-})
-```
-
-With steno you'll always have the same data in your server and file. And in case of a crash, file integrity will be preserved.
-
-if needed, you can also use `steno.writeFileSync()` which offers atomic writing too.
-
-__Important: works only in a single instance of Node.__
 
 ## License
 

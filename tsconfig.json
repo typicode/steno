@@ -1,0 +1,16 @@
+{
+  "extends": "@tsconfig/node10/tsconfig.json",
+  "files": [
+    "index.ts"
+  ],
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./lib",
+    "declaration": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "removeComments": true
+  }
+}
