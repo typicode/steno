@@ -37,12 +37,18 @@ async function save() {
 
 ```
 Write 1KB data to the same file x 1000
-  fs   : 68.464ms
-  steno: 0.578ms
+  fs (sequential): 229.574ms
+  steno (sequential): 250.186ms
+
+  fs (parallel): 78.812ms
+  steno (parallel): 1.332ms
 
 Write 1MB data to the same file x 1000
-  fs   : 2.166s
-  steno: 1.153ms
+  fs (sequential): 4.707s
+  steno (sequential): 4.303s
+
+  fs (parallel): 1.031s
+  steno (parallel): 9.245ms
 ```
 
 ## License
