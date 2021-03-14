@@ -11,19 +11,29 @@ async function benchmark(data: string, msg: string): Promise<void> {
 
   // console.log(`temp dir: ${dir}`)
   console.log(msg)
-  console.time('  fs   ')
+  console.time('  fs (sequential)')
   for (let i = 0; i < 1000; i++) {
     await writeFile(fsFile, data)
   }
-  console.timeEnd('  fs   ')
+  console.timeEnd('  fs (sequential)')
 
-  console.time('  steno')
+  console.time('  steno (sequential)')
   for (let i = 0; i < 1000; i++) {
     // eslint-disable-next-line
-    steno.write(data)
+    await steno.write(data)
   }
-  console.timeEnd('  steno')
+  console.timeEnd('  steno (sequential)')
   console.log()
+
+  console.time('  fs (parallel)')
+  await Promise.all([...Array(1000).keys()].map(() => writeFile(fsFile, data)))
+  console.timeEnd('  fs (parallel)')
+
+  console.time('  steno (parallel)')
+  await Promise.all([...Array(1000).keys()].map(() => steno.write(data)))
+  console.timeEnd('  steno (parallel)')
+  console.log()
+
 }
 
 async function run(): Promise<void> {
