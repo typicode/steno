@@ -33,22 +33,23 @@ async function save() {
 
 ## Benchmark
 
-`npm run benchmark`
+`npm run benchmark` (see `src/benchmark.ts`)
 
 ```
 Write 1KB data to the same file x 1000
-  fs (sequential): 229.574ms
-  steno (sequential): 250.186ms
 
-  fs (parallel): 78.812ms
-  steno (parallel): 1.332ms
+  fs     : 62.303ms
+  steno  : 1.384ms
+
+  fs.txt = steno.txt ✓
+
 
 Write 1MB data to the same file x 1000
-  fs (sequential): 4.707s
-  steno (sequential): 4.303s
 
-  fs (parallel): 1.031s
-  steno (parallel): 9.245ms
+  fs     : 2.300s
+  steno  : 5.444ms
+
+  fs.txt = steno.txt ✓
 ```
 
 ## License
