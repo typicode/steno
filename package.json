@@ -6,7 +6,8 @@
   "exports": "./lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
-    "lib"
+    "lib",
+    "!lib/**/*.test.*"
   ],
   "scripts": {
     "test": "npm run build && xv 'lib/**/*.test.js'",
