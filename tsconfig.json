@@ -1,16 +1,11 @@
 {
-  "extends": "@tsconfig/node10/tsconfig.json",
-  "files": [
-    "src/index.ts"
-  ],
+  "extends": "@sindresorhus/tsconfig",
   "compilerOptions": {
-    "rootDir": "./src",
     "outDir": "./lib",
-    "declaration": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "removeComments": true
+    "module":"ESNext",
+    "baseUrl": ".",
+    "paths": {
+      "xv": ["node_modules/xv/lib"]
+    }
   }
 }

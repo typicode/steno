@@ -1,9 +1,12 @@
-import os from 'os'
+import { strictEqual } from 'assert'
 import fs from 'fs'
+import os from 'os'
 import path from 'path'
-import { Writer } from './'
+import { test } from 'xv'
 
-test('Steno', async () => {
+import { Writer } from './index.js'
+
+await test('steno', async () => {
   const max = 1000
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'steno-test-'))
   const file = path.join(dir, 'tmp.txt')
@@ -18,5 +21,5 @@ test('Steno', async () => {
 
   // All promises should resolve
   await Promise.all(promises)
-  expect(parseInt(fs.readFileSync(file, 'utf-8'))).toBe(max)
+  strictEqual(parseInt(fs.readFileSync(file, 'utf-8')), max)
 })

@@ -1,8 +1,9 @@
+import { readFileSync } from 'fs'
+import { mkdtemp, writeFile } from 'fs/promises'
 import os from 'os'
 import path from 'path'
-import { mkdtemp, writeFile } from 'fs/promises'
-import { Writer } from './index'
-import { readFileSync } from 'fs'
+
+import { Writer } from './index.js'
 
 async function benchmark(data: string, msg: string): Promise<void> {
   const dir = await mkdtemp(path.join(os.tmpdir(), 'steno-'))
