@@ -2,6 +2,29 @@
   "name": "steno",
   "version": "2.0.0",
   "description": "Specialized fast async file writer",
+  "keywords": [
+    "fs",
+    "file",
+    "write",
+    "writer",
+    "asynchronous",
+    "fast",
+    "race",
+    "condition",
+    "atomic",
+    "writing",
+    "safe"
+  ],
+  "homepage": "https://github.com/typicode/steno",
+  "bugs": {
+    "url": "https://github.com/typicode/steno/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/typicode/steno.git"
+  },
+  "license": "MIT",
+  "author": "Typicode <typicode@gmail.com>",
   "type": "module",
   "exports": "./lib/index.js",
   "types": "lib/index.d.ts",
@@ -19,29 +42,6 @@
     "benchmark": "npm run build && node lib/benchmark.js",
     "commit": "commit"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/typicode/steno.git"
-  },
-  "keywords": [
-    "fs",
-    "file",
-    "write",
-    "writer",
-    "asynchronous",
-    "fast",
-    "race",
-    "condition",
-    "atomic",
-    "writing",
-    "safe"
-  ],
-  "author": "Typicode <typicode@gmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/typicode/steno/issues"
-  },
-  "homepage": "https://github.com/typicode/steno",
   "devDependencies": {
     "@commitlint/cli": "^12.0.1",
     "@commitlint/config-conventional": "^12.0.1",
