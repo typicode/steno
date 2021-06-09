@@ -1,4 +1,4 @@
-import { strictEqual } from 'assert'
+import { strictEqual as equal } from 'assert'
 import fs from 'fs'
 import os from 'os'
 import path from 'path'
@@ -21,5 +21,5 @@ await test('steno', async () => {
 
   // All promises should resolve
   await Promise.all(promises)
-  strictEqual(parseInt(fs.readFileSync(file, 'utf-8')), max)
+  equal(parseInt(fs.readFileSync(file, 'utf-8')), max)
 })
