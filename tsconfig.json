@@ -1,5 +1,6 @@
 {
   "extends": "@sindresorhus/tsconfig",
+  "target": "ES2018",
   "compilerOptions": {
     "outDir": "./lib"
   }
