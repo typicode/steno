@@ -44,14 +44,14 @@
     "commit": "commit"
   },
   "devDependencies": {
-    "@commitlint/cli": "^12.1.4",
-    "@commitlint/config-conventional": "^12.1.4",
-    "@commitlint/prompt-cli": "^12.1.4",
+    "@commitlint/cli": "^13.1.0",
+    "@commitlint/config-conventional": "^13.1.0",
+    "@commitlint/prompt-cli": "^13.1.0",
     "@sindresorhus/tsconfig": "^1.0.2",
-    "@types/node": "^15.14.7",
+    "@types/node": "^16.6.1",
     "@typicode/eslint-config": "^0.1.2",
-    "del-cli": "^3.0.1",
-    "husky": "^6.0.0",
+    "del-cli": "^4.0.1",
+    "husky": "^7.0.1",
     "typescript": "^4.3.5",
     "xv": "^0.2.3"
   },
