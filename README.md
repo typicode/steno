@@ -10,12 +10,10 @@ _https://en.wikipedia.org/wiki/Stenotype_
 
 ## Features
 
-- Fast (see benchmark)
-- Lightweight (~6kb)
-- Promise-based
-- Atomic write
-- No race condition
-- TypeScript definitions
+- ⚡ Fast (see benchmark)
+- 🐦 Lightweight (~6kb)
+- 👍 ⚛️ Safe: No partial writes (writes are atomic)
+- 👍 🏁 Safe: No race conditions (writes are ordered even if they're async)
 
 ## Usage
 
@@ -44,6 +42,8 @@ Write 1MB data to the same file x 1000
   fs     : 2300ms
   steno  :    5ms
 ```
+
+_Steno uses a smart queue and avoids unnecessary writes._
 
 ## License
 
