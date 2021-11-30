@@ -1,6 +1,6 @@
 {
   "name": "steno",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Specialized fast async file writer",
   "keywords": [
     "fs",
@@ -28,6 +28,7 @@
   "author": "Typicode <typicode@gmail.com>",
   "type": "module",
   "exports": "./lib/index.js",
+  "main": "./lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
     "lib/index.js",
