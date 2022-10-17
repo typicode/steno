@@ -1,10 +1,10 @@
 import { rename, writeFile } from 'node:fs/promises'
-import path from 'node:path'
+import { basename, dirname, join } from 'node:path'
 
 // Returns a temporary file
 // Example: for /some/file will return /some/.file.tmp
 function getTempFilename(file: string): string {
-  return path.join(path.dirname(file), '.' + path.basename(file) + '.tmp')
+  return join(dirname(file), '.' + basename(file) + '.tmp')
 }
 
 type Resolve = () => void
