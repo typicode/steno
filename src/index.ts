@@ -1,5 +1,5 @@
-import fs from 'fs'
-import path from 'path'
+import { rename, writeFile } from 'node:fs/promises'
+import path from 'node:path'
 
 // Returns a temporary file
 // Example: for /some/file will return /some/.file.tmp
@@ -41,14 +41,16 @@ export class Writer {
     this.#locked = true
     try {
       // Atomic write
-      await fs.promises.writeFile(this.#tempFilename, data, 'utf-8')
-      await fs.promises.rename(this.#tempFilename, this.#filename)
+      await writeFile(this.#tempFilename, data, 'utf-8')
+      await rename(this.#tempFilename, this.#filename)
 
       // Call resolve
       this.#prev?.[0]()
     } catch (err) {
       // Call reject
-      this.#prev?.[1](err)
+      if (err instanceof Error) {
+        this.#prev?.[1](err)
+      }
       throw err
     } finally {
       // Unlock file
