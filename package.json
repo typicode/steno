@@ -1,6 +1,6 @@
 {
   "name": "steno",
-  "version": "3.2.0",
+  "version": "3.0.0",
   "description": "Specialized fast async file writer",
   "keywords": [
     "fs",
@@ -19,7 +19,10 @@
   "bugs": {
     "url": "https://github.com/typicode/steno/issues"
   },
-  "repository": "typicode/steno",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/typicode/steno.git"
+  },
   "funding": "https://github.com/sponsors/typicode",
   "license": "MIT",
   "author": "Typicode <typicode@gmail.com>",
