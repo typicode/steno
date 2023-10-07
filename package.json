@@ -19,10 +19,7 @@
   "bugs": {
     "url": "https://github.com/typicode/steno/issues"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/typicode/steno.git"
-  },
+  "repository": "typicode/steno",
   "funding": "https://github.com/sponsors/typicode",
   "license": "MIT",
   "author": "Typicode <typicode@gmail.com>",
