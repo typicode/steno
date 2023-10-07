@@ -1,18 +1,20 @@
+import { PathLike } from 'node:fs'
 import { rename, writeFile } from 'node:fs/promises'
 import { basename, dirname, join } from 'node:path'
 
 // Returns a temporary file
 // Example: for /some/file will return /some/.file.tmp
-function getTempFilename(file: string): string {
-  return join(dirname(file), '.' + basename(file) + '.tmp')
+function getTempFilename(file: PathLike): string {
+  const f = file.toString()
+  return join(dirname(f), `.${basename(f)}.tmp`)
 }
 
 type Resolve = () => void
 type Reject = (error: Error) => void
 
 export class Writer {
-  #filename: string
-  #tempFilename: string
+  #filename: PathLike
+  #tempFilename: PathLike
   #locked = false
   #prev: [Resolve, Reject] | null = null
   #next: [Resolve, Reject] | null = null
@@ -67,7 +69,7 @@ export class Writer {
     }
   }
 
-  constructor(filename: string) {
+  constructor(filename: PathLike) {
     this.#filename = filename
     this.#tempFilename = getTempFilename(filename)
   }
