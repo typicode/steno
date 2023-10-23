@@ -1,24 +1,29 @@
-import { strictEqual as equal } from 'assert'
-import fs from 'fs'
-import os from 'os'
-import path from 'path'
-
+import { strictEqual as equal } from 'node:assert'
+import fs from 'node:fs'
+import os from 'node:os'
+import path from 'node:path'
+import url from 'node:url'
 import { Writer } from './index.js'
 
 export async function testSteno(): Promise<void> {
   const max = 1000
+
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'steno-test-'))
-  const file = path.join(dir, 'tmp.txt')
 
-  const writer = new Writer(file)
-  const promises = []
+  const file = path.join(dir, 'file.txt')
+  const fileURL = url.pathToFileURL(path.join(dir, 'fileURL.txt'))
 
-  // Test race condition
-  for (let i = 1; i <= max; ++i) {
-    promises.push(writer.write(String(i)))
+  for (const f of [file, fileURL]) {
+    const writer = new Writer(f)
+    const promises = []
+
+    // Test race condition
+    for (let i = 1; i <= max; ++i) {
+      promises.push(writer.write(String(i)))
+    }
+
+    // All promises should resolve
+    await Promise.all(promises)
+    equal(parseInt(fs.readFileSync(file, 'utf-8')), max)
   }
-
-  // All promises should resolve
-  await Promise.all(promises)
-  equal(parseInt(fs.readFileSync(file, 'utf-8')), max)
 }

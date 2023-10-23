@@ -1,11 +1,12 @@
 import { PathLike } from 'node:fs'
 import { rename, writeFile } from 'node:fs/promises'
 import { basename, dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
 
 // Returns a temporary file
 // Example: for /some/file will return /some/.file.tmp
 function getTempFilename(file: PathLike): string {
-  const f = file.toString()
+  const f = file instanceof URL ? fileURLToPath(file) : file.toString()
   return join(dirname(f), `.${basename(f)}.tmp`)
 }
 
