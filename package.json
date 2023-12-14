@@ -1,5 +1,5 @@
 {
-  "name": "steno",
+  "name": "@sgtpooki/steno-patched",
   "version": "3.1.1",
   "description": "Specialized fast async file writer",
   "keywords": [
@@ -15,17 +15,17 @@
     "writing",
     "safe"
   ],
-  "homepage": "https://github.com/typicode/steno",
+  "homepage": "https://github.com/SgtPooki/steno",
   "bugs": {
-    "url": "https://github.com/typicode/steno/issues"
+    "url": "https://github.com/SgtPooki/steno/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/typicode/steno.git"
+    "url": "git+https://github.com/SgtPooki/steno.git"
   },
-  "funding": "https://github.com/sponsors/typicode",
+  "funding": "https://github.com/sponsors/SgtPooki",
   "license": "MIT",
-  "author": "Typicode <typicode@gmail.com>",
+  "author": "Russell Dempsey <1173416+SgtPooki@users.noreply.github.com>",
   "type": "module",
   "exports": "./lib/index.js",
   "types": "lib/index.d.ts",
@@ -53,6 +53,7 @@
     "del-cli": "^5.1.0",
     "husky": "^8.0.3",
     "typescript": "^5.2.2",
+    "uint8arrays": "^5.0.0",
     "xv": "^2.1.1"
   },
   "engines": {
