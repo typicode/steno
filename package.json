@@ -1,6 +1,6 @@
 {
   "name": "steno",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "Specialized fast async file writer",
   "keywords": [
     "fs",
