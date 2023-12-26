@@ -34,7 +34,7 @@
     "lib/index.d.ts"
   ],
   "scripts": {
-    "test": "npm run build && xv lib",
+    "test": "node --import tsx/esm --test src/test.ts",
     "build": "del-cli lib && tsc",
     "lint": "eslint src --ext .ts --ignore-path .gitignore",
     "prepare": "husky install",
@@ -52,8 +52,8 @@
     "@typicode/eslint-config": "^1.2.0",
     "del-cli": "^5.1.0",
     "husky": "^8.0.3",
-    "typescript": "^5.2.2",
-    "xv": "^2.1.1"
+    "tsx": "^4.7.0",
+    "typescript": "^5.2.2"
   },
   "engines": {
     "node": ">=16"
