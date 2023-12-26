@@ -3,13 +3,30 @@ import { rename, writeFile } from 'node:fs/promises'
 import { basename, dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-import retry from 'async-retry'
-
 // Returns a temporary file
 // Example: for /some/file will return /some/.file.tmp
 function getTempFilename(file: PathLike): string {
   const f = file instanceof URL ? fileURLToPath(file) : file.toString()
   return join(dirname(f), `.${basename(f)}.tmp`)
+}
+
+// Retries an asynchronous operation with a delay between retries and a maximum retry count
+async function retryAsyncOperation(
+  fn: () => Promise<void>,
+  maxRetries: number,
+  delayMs: number,
+): Promise<void> {
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      return await fn()
+    } catch (error) {
+      if (i < maxRetries - 1) {
+        await new Promise((resolve) => setTimeout(resolve, delayMs))
+      } else {
+        throw error // Rethrow the error if max retries reached
+      }
+    }
+  }
 }
 
 type Resolve = () => void
@@ -48,13 +65,12 @@ export class Writer {
     try {
       // Atomic write
       await writeFile(this.#tempFilename, data, 'utf-8')
-      await retry(
+      await retryAsyncOperation(
         async () => {
           await rename(this.#tempFilename, this.#filename)
         },
-        {
-          minTimeout: 100,
-        },
+        10,
+        100,
       )
 
       // Call resolve

@@ -58,8 +58,5 @@
   },
   "engines": {
     "node": ">=18"
-  },
-  "dependencies": {
-    "async-retry": "^1.3.3"
   }
 }
