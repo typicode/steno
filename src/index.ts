@@ -12,6 +12,7 @@ function getTempFilename(file: PathLike): string {
 
 type Resolve = () => void
 type Reject = (error: Error) => void
+export type writeableData = Parameters<typeof writeFile>[1]
 
 export class Writer {
   #filename: PathLike
@@ -20,10 +21,10 @@ export class Writer {
   #prev: [Resolve, Reject] | null = null
   #next: [Resolve, Reject] | null = null
   #nextPromise: Promise<void> | null = null
-  #nextData: string | null = null
+  #nextData: writeableData | null = null
 
   // File is locked, add data for later
-  #add(data: string): Promise<void> {
+  #add(data: writeableData): Promise<void> {
     // Only keep most recent data
     this.#nextData = data
 
@@ -39,7 +40,7 @@ export class Writer {
   }
 
   // File isn't locked, write data
-  async #write(data: string): Promise<void> {
+  async #write(data: writeableData): Promise<void> {
     // Lock file
     this.#locked = true
     try {
@@ -75,7 +76,7 @@ export class Writer {
     this.#tempFilename = getTempFilename(filename)
   }
 
-  async write(data: string): Promise<void> {
+  async write(data: writeableData): Promise<void> {
     return this.#locked ? this.#add(data) : this.#write(data)
   }
 }
