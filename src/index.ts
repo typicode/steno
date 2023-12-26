@@ -3,6 +3,8 @@ import { rename, writeFile } from 'node:fs/promises'
 import { basename, dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
+import retry from 'async-retry'
+
 // Returns a temporary file
 // Example: for /some/file will return /some/.file.tmp
 function getTempFilename(file: PathLike): string {
@@ -46,7 +48,14 @@ export class Writer {
     try {
       // Atomic write
       await writeFile(this.#tempFilename, data, 'utf-8')
-      await rename(this.#tempFilename, this.#filename)
+      await retry(
+        async () => {
+          await rename(this.#tempFilename, this.#filename)
+        },
+        {
+          minTimeout: 100,
+        },
+      )
 
       // Call resolve
       this.#prev?.[0]()
