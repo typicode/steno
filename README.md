@@ -1,19 +1,19 @@
 # Steno [![](http://img.shields.io/npm/dm/steno.svg?style=flat)](https://www.npmjs.org/package/steno) [![Node.js CI](https://github.com/typicode/steno/actions/workflows/node.js.yml/badge.svg)](https://github.com/typicode/steno/actions/workflows/node.js.yml)
 
-> Specialized fast async file writer
+> Super fast async file writer with atomic write
 
-**Steno** makes writing to the same file often/concurrently fast and safe.
+**Steno** makes writing concurrently fast and safe.
 
-Used in [lowdb](https://github.com/typicode/lowdb).
-
-_https://en.wikipedia.org/wiki/Stenotype_
+Battle-tested in [lowdb](https://github.com/typicode/lowdb).
 
 ## Features
 
 - ⚡ Fast (see benchmark)
 - 🐦 Lightweight (~6kb)
-- 👍 ⚛️ Safe: No partial writes (writes are atomic)
-- 👍 🏁 Safe: No race conditions (writes are ordered even if they're async)
+- 🩵 Written in TypeScript
+- 🖊️ Writes are atomic (no partial writes)
+- 🏎️ Writes are ordered even if they're async (no race conditions)
+- ♻️ Automatic retry
 
 ## Usage
 
@@ -44,6 +44,10 @@ Write 1MB data to the same file x 1000
 ```
 
 _Steno uses a smart queue and avoids unnecessary writes._
+
+## Name
+
+https://en.wikipedia.org/wiki/Stenotype
 
 ## License
 
