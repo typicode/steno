@@ -2,7 +2,7 @@ import { strictEqual as equal } from 'node:assert'
 import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
-import test from 'node:test';
+import test from 'node:test'
 import url from 'node:url'
 
 import { Writer } from './index.js'
