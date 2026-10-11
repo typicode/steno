@@ -91,7 +91,8 @@ export class Writer {
       if (this.#nextData !== null) {
         const nextData = this.#nextData
         this.#nextData = null
-        await this.write(nextData)
+        // Queued callers receive failures through #prev; keep this write's result independent.
+        void this.write(nextData).catch(() => {})
       }
     }
   }
